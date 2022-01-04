@@ -108,4 +108,4 @@ tsEvap = etDataShort['adjRefEvapo'].tolist()
 
 # write calculated PET back to output channel
 tsEvap.columns['time','value']
-tsEvap.to_csv('Potential ET')
+tsEvap.to_csv('Potential Evapotranspiration')
