@@ -96,18 +96,23 @@ etData['refEvapo'] = etData['radiationTerm'] + etData['windTerm']
 # Calculate adjusted reference evapotranspiration
 etData['adjRefEvapo'] = etData['refEvapo'].apply(lambda x: 0 if x < 0 else x)
 
-# Grab only data that is greater than or equal to midnight today
-midnightStartDate = datetime.combine(date.today(), datetime.min.time())
-etDataShort = etData.loc[etData['Timestamp']>=midnightStartDate]
+##########
+# removing date checking as available data is until 31th 12 2021
+# # Grab only data that is greater than or equal to midnight today
+# midnightStartDate = datetime.combine(date.today(), datetime.min.time())
+# etDataShort = etData.loc[etData['Timestamp']>=midnightStartDate]
 
-# Split Timestamp and adjRefEvapo into their own lists
-tsDate = etDataShort['Timestamp'].tolist()
-# Convert tsDate to string
-tsDate = []
-for ts in tsDate:
-        tsDate.append(ts.strftime("%m/%d/%Y %H:%M"))
-tsEvap = etDataShort['adjRefEvapo'].tolist()
+# # Split Timestamp and adjRefEvapo into their own lists
+# tsDate = etDataShort['Timestamp'].tolist()
+# # Convert tsDate to string
+# tsDate = []
+# for ts in tsDate:
+#         tsDate.append(ts.strftime("%m/%d/%Y %H:%M"))
+# tsEvap = etDataShort['adjRefEvapo'].tolist()
 
 # write calculated PET back to output channel
-tsEvap.columns['time','value']
+tsEvap=etData[['Timestamp','adjRefEvapo']]
+tsEvap.columns=['time','value']
+print(tsEvap)
+
 tsEvap.to_csv('Potential Evapotranspiration')
