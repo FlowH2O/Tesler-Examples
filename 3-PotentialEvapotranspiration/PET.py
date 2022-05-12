@@ -40,7 +40,10 @@ dfWindSpeed.set_index("time", inplace=True)
 
 # combine into one dataframe
 etData = pd.concat([dfMeanTemp,dfMaxTemp,dfMinTemp,dfRelHumidity,dfInsolIncident,dfWindSpeed], axis=1, join='inner')
+etData.reset_index(inplace = True)
 etData.columns = ['Timestamp','smMeanTemp','smMaxTemp','smMinTemp','smRelHum','smInsInc','smWindSpeed']
+
+print(etData.head())
 
 # Calculate parameters
 latRad = np.pi/180*latDeg
