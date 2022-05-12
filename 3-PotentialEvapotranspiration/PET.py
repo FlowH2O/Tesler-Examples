@@ -1,5 +1,4 @@
-import date
-import datetime
+from datetime import date, datetime
 import pandas as pd
 import numpy as np
 
@@ -41,7 +40,10 @@ dfWindSpeed.set_index("time", inplace=True)
 
 # combine into one dataframe
 etData = pd.concat([dfMeanTemp,dfMaxTemp,dfMinTemp,dfRelHumidity,dfInsolIncident,dfWindSpeed], axis=1, join='inner')
+etData.reset_index(inplace = True)
 etData.columns = ['Timestamp','smMeanTemp','smMaxTemp','smMinTemp','smRelHum','smInsInc','smWindSpeed']
+
+print(etData.head())
 
 # Calculate parameters
 latRad = np.pi/180*latDeg
@@ -94,18 +96,23 @@ etData['refEvapo'] = etData['radiationTerm'] + etData['windTerm']
 # Calculate adjusted reference evapotranspiration
 etData['adjRefEvapo'] = etData['refEvapo'].apply(lambda x: 0 if x < 0 else x)
 
-# Grab only data that is greater than or equal to midnight today
-midnightStartDate = datetime.combine(date.today(), datetime.min.time())
-etDataShort = etData.loc[etData['Timestamp']>=midnightStartDate]
+##########
+# removing date checking as available data is until 31th 12 2021
+# # Grab only data that is greater than or equal to midnight today
+# midnightStartDate = datetime.combine(date.today(), datetime.min.time())
+# etDataShort = etData.loc[etData['Timestamp']>=midnightStartDate]
 
-# Split Timestamp and adjRefEvapo into their own lists
-tsDate = etDataShort['Timestamp'].tolist()
-# Convert tsDate to string
-tsDate = []
-for ts in tsDate:
-        tsDate.append(ts.strftime("%m/%d/%Y %H:%M"))
-tsEvap = etDataShort['adjRefEvapo'].tolist()
+# # Split Timestamp and adjRefEvapo into their own lists
+# tsDate = etDataShort['Timestamp'].tolist()
+# # Convert tsDate to string
+# tsDate = []
+# for ts in tsDate:
+#         tsDate.append(ts.strftime("%m/%d/%Y %H:%M"))
+# tsEvap = etDataShort['adjRefEvapo'].tolist()
 
 # write calculated PET back to output channel
-tsEvap.columns['time','value']
+tsEvap=etData[['Timestamp','adjRefEvapo']]
+tsEvap.columns=['time','value']
+print(tsEvap)
+
 tsEvap.to_csv('Potential Evapotranspiration')
