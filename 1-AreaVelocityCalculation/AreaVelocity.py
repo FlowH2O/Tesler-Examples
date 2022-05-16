@@ -1,7 +1,7 @@
 import csv
 import sys
 import math
-
+import pandas as pd
 # Tesler script to calculate the area of a partially full pipe, multiply by velocity to produce a flow
 
 diameter=900.0 # (diameter of pipe in mm)
@@ -11,18 +11,20 @@ depths=[]
 velocities=[]
 flows=[]
 
-with open("Level.csv") as csvfile:
-    reader=csv.reader(csvfile,delimiter=',')
-    next(reader)
-    for row in reader:
-       dateData.append(str(row[0]))
-       depths.append(float(row[1]))
+depths = pd.read_csv("level.csv")
+vels = pd.read_csv("velocity.csv")
+# with open("Level.csv") as csvfile:
+#     reader=csv.reader(csvfile,delimiter=',')
+#     next(reader)
+#     for row in reader:
+#        dateData.append(str(row[0]))
+#        depths.append(float(row[1]))
 
-with open("Velocity.csv") as csvfile:
-    reader2=csv.reader(csvfile,delimiter=',')
-    next(reader2)
-    for row in reader2:
-        velocities.append(float(row[1]))
+# with open("Velocity.csv") as csvfile:
+#     reader2=csv.reader(csvfile,delimiter=',')
+#     next(reader2)
+#     for row in reader2:
+#         velocities.append(float(row[1]))
 
 if len(depths)!=len(velocities):
       sys.exit()
