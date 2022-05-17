@@ -1,6 +1,3 @@
-import csv
-from multiprocessing.spawn import prepare
-import sys
 import math
 import pandas as pd
 # Tesler script to calculate the area of a partially full pipe, multiply by velocity to produce a flow
