@@ -18,6 +18,8 @@ Example usage: [AreaVelocity.py](1-AreaVelocityCalculation/AreaVelocity.py)
     Data available between Jan 1, 2020 and Dec 31, 2021.
 &nbsp;
 &nbsp;
+    requirements:
+    pandas
 
 ### 2. Pump Station Calculation
 
