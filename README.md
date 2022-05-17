@@ -18,6 +18,8 @@ Example usage: [AreaVelocity.py](1-AreaVelocityCalculation/AreaVelocity.py)
     Data available between Jan 1, 2020 and Dec 31, 2021.
 &nbsp;
 &nbsp;
+    requirements:
+    pandas
 
 ### 2. Pump Station Calculation
 
@@ -51,5 +53,10 @@ Example usage: [PET.py](3-PotentialEvapotranspiration/PET.py)
     Output Channel:  Potential Evapotranspiration
 
     Data available between May 1, 2020 and Dec 31, 2021.
+
+    requirements: 
+    pandas
+    numpy
+    datetime
 &nbsp;
 &nbsp;
