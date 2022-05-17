@@ -45,10 +45,10 @@ area=math.pi*(diameterM)**2/4 # calculate area of full pipe in square meters
 dateData=[]
 flows=[]
 
-dp = pd.read_csv("level.csv")
+dp = pd.read_csv("Level.csv")
 dp = prepare_data(dp,"depth")
 
-vel = pd.read_csv("velocity.csv")
+vel = pd.read_csv("Velocity.csv")
 vel = prepare_data(vel,"velocity")
 
 def calcFlow(depth, velocity):
@@ -66,10 +66,12 @@ def calcFlow(depth, velocity):
                 
 
 df = merge_data(dp, vel)
+print(df)
 
 df['flow'] = df.apply(lambda row: calcFlow(row.depth,row.velocity), axis = 1)
 df= df[['time','flow']]
 df.columns = ['time', 'value']
 df.set_index("time", inplace=True)
+print(df)
 output_file_name="Calculated Flow"
 df.to_csv(output_file_name + ".csv")
