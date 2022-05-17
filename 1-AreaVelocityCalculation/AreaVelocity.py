@@ -63,7 +63,7 @@ def calcFlow(depth, velocity):
         else:
                 areaC=area-(areaSector-areaMon) # calculate area of pipe flow when pipe is greater than half full
         flow=areaC*(velocity/3.281)*1000.0 # calculate flow in l/s
-                
+        return flow        
 
 df = merge_data(dp, vel)
 print(df)
